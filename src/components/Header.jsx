@@ -30,23 +30,15 @@ export default class Header extends Component {
     return (
       <header data-testid="header-component">
         { isLoading ? <Loading /> : <p data-testid="header-user-name">{ name }</p> }
-        <Link to="/search">
+        <Link data-testid="link-to-search" to="/search">
           Procurar
         </Link>
-        <Link to="/album/:id">
-          Album
-          <br />
-        </Link>
-        <Link to="/favorites">
+        <Link data-testid="link-to-favorites" to="/favorites">
           Favoritos
           <br />
         </Link>
-        <Link to="/profile">
+        <Link data-testid="link-to-profile" to="/profile">
           Perfil
-          <br />
-        </Link>
-        <Link to="/profile/edit">
-          Editar perfil
           <br />
         </Link>
         <span />
