@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 export default class MusicCard extends Component {
@@ -21,14 +21,22 @@ export default class MusicCard extends Component {
     return favSongs.map((song) => song.trackId).includes(trackId);
   };
 
-  getApiSong = async () => {
+  getApiSong = async (event) => {
+    const isChecked = event.target.checked;
     const { music } = this.props;
     this.setState({
       isLoading: true,
-    });
-    await addSong(music);
-    this.setState({
-      isLoading: false,
+      checked: isChecked,
+    }, async () => {
+      if (isChecked) {
+        await addSong(music);
+      } else {
+        await removeSong(music);
+      }
+
+      this.setState({
+        isLoading: false,
+      });
     });
   };
 
